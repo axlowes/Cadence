@@ -12,6 +12,7 @@
   "dependencies": {
     "@fontsource/cormorant-garamond": "^5.3.0",
     "@fontsource/inter": "^5.3.0",
+    "@fontsource/unifrakturmaguntia": "^5.3.0",
     "astronomy-engine": "^2.1.19",
     "culori": "^4.0.2",
     "dexie": "^4.4.7",

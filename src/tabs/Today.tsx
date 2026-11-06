@@ -26,7 +26,7 @@ export function Today({ now, placeKnown, onLocate, onOpenMoon, onOpenSettings }:
         <button className="sky-header-tap" onClick={onOpenMoon}>
           <MoonDrawing angle={moon.angle} size={84} />
           <div>
-            <p className="eyebrow">{date}</p>
+            <p className="date-old">{date}</p>
             <h1 className="serif">
               {moon.phaseName} in {moon.sign}, {Math.round(moon.illumination * 100)}%
             </h1>
