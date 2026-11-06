@@ -1,4 +1,4 @@
-# Little Sky
+# Cadence
 
 A personal moon-rhythm app for one person: habits, tasks, calendar and feelings alongside the Moon. Installable PWA for iPhone.
 

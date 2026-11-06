@@ -22,7 +22,7 @@ export function Passcode({ creating, onDone }: { creating: boolean; onDone: () =
     unlock: 'Welcome back',
   }
   const hints: Record<Mode, string> = {
-    create: '4 to 6 digits. It keeps this little sky yours alone.',
+    create: '4 to 6 digits. It keeps Cadence yours alone.',
     confirm: 'Type the same digits again.',
     unlock: 'Your passcode opens the door.',
   }

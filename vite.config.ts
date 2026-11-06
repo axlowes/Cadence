@@ -2,7 +2,7 @@ import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
-// BASE is set by the deploy workflow (e.g. "/little-sky/" on GitHub Pages).
+// BASE is set by the deploy workflow (e.g. "/cadence/" on GitHub Pages).
 const base = process.env.BASE ?? '/'
 
 export default defineConfig({
@@ -13,8 +13,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       pwaAssets: { config: true, overrideManifestIcons: true },
       manifest: {
-        name: 'Little Sky',
-        short_name: 'Little Sky',
+        name: 'Cadence',
+        short_name: 'Cadence',
         description: 'Your habits, tasks and feelings, held by the moon.',
         display: 'standalone',
         orientation: 'portrait',

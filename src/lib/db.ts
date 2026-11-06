@@ -8,7 +8,7 @@ export interface Setting {
 class SkyDB extends Dexie {
   settings!: EntityTable<Setting, 'key'>
   constructor() {
-    super('little-sky')
+    super('cadence')
     this.version(1).stores({ settings: 'key' })
   }
 }
