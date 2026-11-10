@@ -7,6 +7,7 @@ const base = process.env.BASE ?? '/'
 
 export default defineConfig({
   base,
+  build: { cssTarget: ['safari16', 'chrome111', 'firefox115'] },
   plugins: [
     react(),
     VitePWA({

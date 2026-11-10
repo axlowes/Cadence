@@ -41,9 +41,70 @@ export const CrystalIcon = () => (
     <path d="M7 9h10M12 3l-2 6 2 12 2-12z" />
   </svg>
 )
+export const WeightIcon = () => (
+  <svg {...base}>
+    <path d="M8 12h8" />
+    <path d="M5.5 8.5v7M8 7v10M16 7v10M18.5 8.5v7" />
+    <path d="M3.5 12h2M18.5 12h2" />
+  </svg>
+)
+export const CalendarIcon = () => (
+  <svg {...base}>
+    <rect x="4" y="5.5" width="16" height="14.5" rx="2.5" />
+    <path d="M4 10h16M8.5 3.5v3.5M15.5 3.5v3.5" />
+    <path d="M14.6 13.2a2.6 2.6 0 1 0 1.6 4.2 2.1 2.1 0 0 1-1.6-4.2z" />
+  </svg>
+)
 export const GearIcon = () => (
   <svg {...base} width={22} height={22}>
     <circle cx="12" cy="12" r="3" />
     <path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7" />
+  </svg>
+)
+
+import type { HabitIcon } from '../lib/db'
+
+const PATHS: Record<HabitIcon, React.ReactNode> = {
+  candle: (
+    <>
+      <path d="M12 3.5c1.6 1.8 1.9 3.2.9 4.3-.5.5-1.4.5-1.9 0-.9-1 .1-2.6 1-4.3z" />
+      <path d="M8.5 10h7v10.5h-7zM12 8.3V10M6.5 20.5h11" />
+    </>
+  ),
+  crystal: <path d="M12 3 7 9l5 12 5-12zM7 9h10M12 3l-2 6 2 12 2-12z" />,
+  leaf: (
+    <>
+      <path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14z" />
+      <path d="M5 19 13 11" />
+    </>
+  ),
+  cup: (
+    <>
+      <path d="M5 8h11v5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5z" />
+      <path d="M16 9.5h1.5a2.2 2.2 0 0 1 0 4.4H16M8 4.5c0 1 1 1 1 2M11 4c0 1 1 1 1 2M4 20.5h13" />
+    </>
+  ),
+  flame: <path d="M12 3c3 3.5 6 6.4 6 10.5A6 6 0 0 1 6 13.5c0-2.4 1.2-4 2.6-5.3.2 2 1 3.2 2.2 3.6C10.3 9 10.9 5.6 12 3z" />,
+  book: (
+    <>
+      <path d="M4 5.5c2.8-1 5.5-1 8 .8 2.5-1.8 5.2-1.8 8-.8v13c-2.8-1-5.5-1-8 .8-2.5-1.8-5.2-1.8-8-.8z" />
+      <path d="M12 6.3v13" />
+    </>
+  ),
+}
+
+export const HABIT_ICONS = Object.keys(PATHS) as HabitIcon[]
+
+export function HabitGlyph({ icon, size = 24 }: { icon: HabitIcon; size?: number }) {
+  return (
+    <svg {...base} width={size} height={size}>
+      {PATHS[icon]}
+    </svg>
+  )
+}
+
+export const CrescentHint = () => (
+  <svg {...base} width={16} height={16} aria-label="Moon hint">
+    <path d="M15.5 4.2A8.3 8.3 0 1 0 19.8 15 6.8 6.8 0 0 1 15.5 4.2z" />
   </svg>
 )

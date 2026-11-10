@@ -15,4 +15,6 @@ A personal moon-rhythm app for one person: habits, tasks, calendar and feelings 
 
 ## Milestones
 1. Shell (done): PWA, five tabs, live sky, offline, passcode.
-2. Moon engine and setup flow. 3. Habits and tasks. 4. Emotions. 5. Google Calendar and 1pm push. 6. Rituals and insights.
+2. Moon engine and setup flow (done): `src/lib/astro.ts`, `lunar.ts`, `natal.ts`, `transits.ts`; words in `src/content/content.json`; `npm test` checks against Swiss Ephemeris (`tests/make_reference.py`).
+3. Habits and tasks (done): `src/lib/habits.ts`, `tasks.ts`, `backup.ts`; tabs in `src/tabs/Habits.tsx`, `Tasks.tsx`. A personal starter list can go in `src/seed/*.local.json` (git-ignored) and loads once into an empty habit list.
+4. 4. Emotions. 5. Google Calendar and 1pm push. 6. Rituals and insights.

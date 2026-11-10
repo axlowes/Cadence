@@ -89,7 +89,7 @@ export function skyAt(date: Date, place: Place): SkyState {
 
 export const inkColor = (ink: 'light' | 'dark') => INK[ink]
 export const glassCss = (ink: 'light' | 'dark', strong = false) => {
-  const g = strong ? { ...GLASS[ink], alpha: 0.84 } : GLASS[ink]
+  const g = strong ? { ...GLASS[ink], alpha: 0.94 } : GLASS[ink]
   const c = parse(g.color) as Color & { r: number; g: number; b: number }
   return `rgba(${Math.round(c.r * 255)}, ${Math.round(c.g * 255)}, ${Math.round(c.b * 255)}, ${g.alpha})`
 }

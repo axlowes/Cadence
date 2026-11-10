@@ -1,0 +1,92 @@
+{
+  "_about": "Every word the app says about the sky lives here. Rewrite anything you like; keep the keys the same.",
+  "aspectWords": {
+    "conjunction": "meets",
+    "sextile": "sextile",
+    "square": "square",
+    "trine": "trine",
+    "opposition": "opposite"
+  },
+  "transits": {
+    "Sun": {
+      "conjunction": "The Moon sits on your Sun, so what you feel and who you are line up for a few hours. Let yourself be seen today, your feelings are telling the truth about you.",
+      "flow": "Your heart and your will speak kindly to each other, meaning the things you want to do feel easy to start. Begin the one you've been saving.",
+      "tension": "A pull between what you need to feel safe and what you want to build, meaning your mood may push against your plans. Let one of them lead for the day and the other can rest."
+    },
+    "Moon": {
+      "conjunction": "This is your lunar return, the Moon home in the sign and degree she held when you were born. A small new beginning for your heart, so make a warm drink and ask yourself honestly what you need this month.",
+      "flow": "Your emotional tides move with today's sky, meaning comfort comes easily. A good day to rest, cook, or call someone who feels like home.",
+      "tension": "Today's mood rubs against your oldest needs, so small things may land a little harder. Notice what you reach for when you feel unsettled, that's the need asking for care."
+    },
+    "Mercury": {
+      "conjunction": "Feeling and thinking arrive at the same moment, meaning your words carry your heart in them today. Write it down before it fades.",
+      "flow": "Your mind is soft and receptive, meaning conversations that felt tangled can loosen. Say the thing kindly and it will be heard.",
+      "tension": "Your head and your heart may tell two different stories today. Give each a page in your journal before you decide which one is true."
+    },
+    "Venus": {
+      "conjunction": "The Moon meets your Venus, so tenderness and pleasure sit close to the surface. Make something beautiful, even small, like a set table or a flower in a glass.",
+      "flow": "Love moves easily in and out of you today, meaning it's a sweet day for affection, for your children, and for yourself.",
+      "tension": "A pull between what you need and what you want to give, meaning you may feel stretched between caring for yourself and caring for others. Both are love, and today asks which one comes first."
+    },
+    "Mars": {
+      "conjunction": "Your feelings catch fire quickly today, meaning energy runs high and patience runs short. Pour it into your body, a walk, a workout, or scrubbing something until it shines.",
+      "flow": "Your courage and your mood are on the same side, meaning it's an easy day to act on something you've been circling.",
+      "tension": "Heat rises faster than usual, so a small irritation can flare. It's an invitation to move the fire through your body instead of toward someone."
+    },
+    "Jupiter": {
+      "conjunction": "The Moon touches your Jupiter, so your heart opens wide and generous. Say yes to something that feels abundant.",
+      "flow": "Hope comes easily today, meaning it's a good moment to plan, to give, or to trust that there is enough.",
+      "tension": "Everything wants more today, more food, more plans, more promises. Lovely, as long as you save some for later."
+    },
+    "Saturn": {
+      "conjunction": "The Moon meets your Saturn, so feelings may come out quieter and more serious. A steady day for the work that keeps your home and your future standing.",
+      "flow": "Your emotions find their structure, meaning it's easy to keep a promise to yourself today. Tidy one thing and feel the ground under you.",
+      "tension": "You may feel the weight of your responsibilities a little more today. Take it as an invitation to set one thing down instead of carrying it all."
+    },
+    "Uranus": {
+      "conjunction": "The Moon lights up your Uranus, so restlessness and sudden insight arrive together. Follow one odd little impulse and see where it leads.",
+      "flow": "Fresh air moves through your feelings, meaning a small change to your routine could feel wonderful.",
+      "tension": "Your need for comfort meets your need for freedom, so plans may shift without warning. Leave a little space in the day and the surprises will feel lighter."
+    },
+    "Neptune": {
+      "conjunction": "The veil is thin for you today, meaning dreams, intuition and sensitivity run strong. Drink water, light a candle, and trust what you sense.",
+      "flow": "Your intuition is clear and gentle today, a lovely time for tarot, meditation or making art.",
+      "tension": "Edges blur today, so it may be hard to tell your feelings from everyone else's. Put your hands in water or soil before you decide anything."
+    },
+    "Pluto": {
+      "conjunction": "The Moon passes over your Pluto, so feelings go deep and old things may rise to the surface. Let them come up, they're ready to change shape.",
+      "flow": "You can see beneath the surface today, meaning honest conversations about feelings go further than usual.",
+      "tension": "Strong feelings ask to be felt all the way through. Write them out, burn the page if you like, and notice how much lighter you are after."
+    },
+    "North Node": {
+      "conjunction": "The Moon crosses your North Node, a nudge toward the life you're growing into. Pay attention to what feels unfamiliar and right at the same time.",
+      "flow": "Small steps toward your purpose feel natural today. Do one thing your future self will thank you for.",
+      "tension": "Old habits feel safe and new ones feel far away. It's an invitation to choose the new thing once, just for today."
+    },
+    "Ascendant": {
+      "conjunction": "The Moon rises over your Ascendant, so your feelings show on your face today. Let people see you as you are.",
+      "flow": "You feel at home in your own body, meaning you'll come across warm without trying.",
+      "tension": "What you feel inside and how you show up may not match today. Wear something that feels like you, it helps the outside catch up with the inside."
+    },
+    "Midheaven": {
+      "conjunction": "The Moon reaches the top of your chart, meaning your feelings touch your work and your public life. Your care shows up as leadership today.",
+      "flow": "Your work and your heart hold each other up, an easy day to share what you make.",
+      "tension": "Home and work both want you at once. Give each one a clear hour and the pull softens."
+    }
+  },
+  "houses": {
+    "1": "your first house, so your feelings live close to the surface and your body wants care first.",
+    "2": "your second house, so comfort comes through food, money and the things you can hold. Tend your resources gently.",
+    "3": "your third house, meaning your heart moves through words today, texts, errands and little talks with the people nearby.",
+    "4": "your fourth house, the root of your chart. Home, family and rest are where you'll feel most like yourself.",
+    "5": "your fifth house, where play, romance and creativity live. Make something just because it's fun, and play with your kids.",
+    "6": "your sixth house, meaning your routines and your body want attention. Small habits done with love will carry the day.",
+    "7": "your seventh house, so your feelings move through your partner and your closest people. Let someone meet you halfway.",
+    "8": "your eighth house, the deep water. Intimacy, shared money and the things you don't say out loud ask for honesty.",
+    "9": "your ninth house, meaning your heart wants something bigger, a lesson, a trip, a book that opens a door.",
+    "10": "your tenth house, so your feelings touch your work and how the world sees you. Lead with your heart and it will be noticed.",
+    "11": "your eleventh house, where friends and community live. Reach out to your people, or dream a little about the future.",
+    "12": "your twelfth house, the quiet room at the back of your chart. Rest, solitude and dreams restore you most today."
+  },
+  "noTime": "Without a birth time, houses and your Rising sign stay hidden, so this reading follows your planets only. Add your time in Settings whenever you find it."
+}
