@@ -2,7 +2,7 @@ import { db, getSetting, setSetting, type Habit, type HabitGroup, type HabitIcon
 import { blankHabit } from './habits'
 import { dateKey } from './dates'
 
-interface SeedItem {
+export interface SeedItem {
   key: string
   name: string
   days: number[]
@@ -36,7 +36,19 @@ const fields = (it: SeedItem): Partial<Habit> => ({
  * Adds each starter item once. An item already added is never touched again, so edits she makes stick.
  * For a habit added by an older version of the list, only the new fields (folder, notes, steps) are filled in.
  */
-export async function applySeedOnce() {
+export const applySeedOnce = () => applySeed(items)
+
+/** A starter file she brings in by hand: her lists, and her chart picture. Adds, never replaces. */
+export async function applyStarter(file: File) {
+  const data = JSON.parse(await file.text()) as { app?: string; items?: SeedItem[]; chartImage?: string }
+  if (data.app !== 'cadence-starter' || !Array.isArray(data.items)) return null
+  const before = await db.habits.count()
+  await applySeed(data.items)
+  if (data.chartImage && !(await getSetting('chartImage'))) await setSetting('chartImage', data.chartImage)
+  return (await db.habits.count()) - before
+}
+
+async function applySeed(items: SeedItem[]) {
   if (!items.length) return
   const done = new Set((await getSetting<string[]>('seededKeys')) ?? [])
   const legacy = !!(await getSetting('seedApplied')) && done.size === 0

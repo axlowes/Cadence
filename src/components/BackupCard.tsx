@@ -1,3 +1,4 @@
+import { applyStarter } from '../lib/seed'
 import { useState } from 'react'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { db, setSetting } from '../lib/db'
@@ -44,7 +45,11 @@ export function BackupCard() {
             const f = e.target.files?.[0]
             e.target.value = ''
             if (!f) return
-            try { setPending(await readBackup(f)); setMsg('') } catch (err) { setMsg((err as Error).message || 'That file could not be read.') }
+            try {
+              const added = await applyStarter(f).catch(() => null)
+              if (added !== null) { setMsg(`Your starter list is in, ${added} habits added.`); return }
+              setPending(await readBackup(f)); setMsg('')
+            } catch (err) { setMsg((err as Error).message || 'That file could not be read.') }
           }} />
         {pending && (
           <div className="stack confirm-box">
