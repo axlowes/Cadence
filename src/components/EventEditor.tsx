@@ -3,6 +3,7 @@ import { Sheet, ConfirmButton } from './Sheet'
 import { db, newId, type CalEvent } from '../lib/db'
 import { dateKey } from '../lib/dates'
 import { fmtTime } from '../lib/useProfile'
+import { deleteFromGoogle, saveToGoogle, token } from '../lib/google'
 
 export const OWN_SOURCE = 'Cadence'
 type Repeat = 'none' | 'DAILY' | 'WEEKLY' | 'MONTHLY' | 'YEARLY'
@@ -40,7 +41,10 @@ export function googleLink(e: CalEvent) {
 }
 
 export function EventEditor({ event, isNew, onClose }: { event: CalEvent; isNew: boolean; onClose: () => void }) {
-  const own = event.source === OWN_SOURCE
+  const live = !!token()
+  const fromGoogle = !!event.calendarId
+  const own = event.source === OWN_SOURCE || (fromGoogle && live && event.canEdit !== false)
+  const [busy, setBusy] = useState('')
   const [day, setDay] = useState(dateKey(new Date(event.start)))
   const [endDay, setEndDay] = useState(dateKey(new Date(event.allDay ? event.end - 86_400_000 : event.end)))
   const [start, setStart] = useState(hm(event.start))
@@ -66,6 +70,15 @@ export function EventEditor({ event, isNew, onClose }: { event: CalEvent; isNew:
     await db.events.put(next)
     onClose()
   }
+  const saveLive = async () => {
+    setBusy('Saving to Google...')
+    try {
+      await saveToGoogle(build())
+      onClose()
+    } catch (err) {
+      setBusy((err as Error).message === 'signed-out' ? 'Google signed you out. Reconnect in Settings and try again.' : (err as Error).message)
+    }
+  }
   const sendToGoogle = async () => {
     const next = { ...build(), sent: true }
     // Open first, while the tap still counts, or Safari blocks the new tab.
@@ -83,7 +96,7 @@ export function EventEditor({ event, isNew, onClose }: { event: CalEvent; isNew:
             {event.allDay ? ', all day' : `, ${fmtTime(new Date(event.start))} to ${fmtTime(new Date(event.end))}`}
           </p>
           {event.location && <p className="muted">{event.location}</p>}
-          <p className="small muted">This one came from {event.source}. Change it in Google Calendar, then bring the file in again.</p>
+          <p className="small muted">{fromGoogle ? `This one lives in ${event.source}. Connect Google in Settings to change it here.` : `This one came from ${event.source}. Change it in Google Calendar, then bring the file in again.`}</p>
         </div>
       </Sheet>
     )
@@ -135,19 +148,27 @@ export function EventEditor({ event, isNew, onClose }: { event: CalEvent; isNew:
         <label className="lbl" htmlFor="ev-note">Notes (optional)</label>
         <textarea id="ev-note" className="field" rows={3} value={e.note ?? ''} onChange={(x) => set({ note: x.target.value })} />
 
-        <button className="pill solid" onClick={sendToGoogle}>{e.sent ? 'Save and open in Google again' : 'Save and add to Google Calendar'}</button>
-        <button className="pill" onClick={() => save()}>Save in Cadence only</button>
-        <p className="small muted">
-          Adding to Google opens a new event in Google Calendar with everything filled in. Tap Save there and it is in your Google Calendar too.
-        </p>
+        {live ? (
+          <button className="pill solid" disabled={busy === 'Saving to Google...'} onClick={saveLive}>Save to Google Calendar</button>
+        ) : (
+          <button className="pill solid" onClick={sendToGoogle}>{e.sent ? 'Save and open in Google again' : 'Save and add to Google Calendar'}</button>
+        )}
+        {!fromGoogle && <button className="pill" onClick={() => save()}>Save in Cadence only</button>}
+        {busy && <p className="small" role="status">{busy}</p>}
+        {!live && (
+          <p className="small muted">
+            Adding to Google opens a new event in Google Calendar with everything filled in. Tap Save there and it is in your Google Calendar too.
+          </p>
+        )}
         {!isNew && (
           <ConfirmButton label="Delete" confirmLabel="Delete this event"
             onConfirm={async () => {
-              await db.events.delete(e.id)
+              if (fromGoogle) await deleteFromGoogle(e).catch((err) => setBusy((err as Error).message))
+              else await db.events.delete(e.id)
               onClose()
             }} />
         )}
-        {!isNew && e.sent && <p className="small muted">Deleting here does not remove it from Google Calendar.</p>}
+        {!isNew && e.sent && !fromGoogle && <p className="small muted">Deleting here does not remove it from Google Calendar.</p>}
       </div>
     </Sheet>
   )

@@ -1,7 +1,7 @@
 name: Deploy to GitHub Pages
-# Publishing on every push is off until GitHub Pages is set up for this account.
-# To publish by hand: Actions tab, Deploy to GitHub Pages, Run workflow.
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read

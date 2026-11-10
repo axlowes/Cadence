@@ -17,6 +17,7 @@ import { useProfile } from './lib/useProfile'
 import { useMoon } from './lib/useMoon'
 import { hasPasscode } from './lib/passcode'
 import { requestPersistence } from './lib/db'
+import { finishSignIn, refreshAtLaunch, syncNow, token } from './lib/google'
 import { inkColor, glassCss } from './lib/sky'
 import { locateMe, useNow, usePlace, useSkyState } from './lib/useSky'
 
@@ -47,6 +48,19 @@ export default function App() {
   const { profile, update, natal } = useProfile()
   const info = useMoon(now, natal, profile?.vocMode ?? 'modern')
   const [editingBirth, setEditingBirth] = useState(false)
+
+  // Live Google Calendar: take a sign-in Google handed back, renew an expired one quietly, then keep events fresh.
+  useEffect(() => {
+    let timer = 0
+    ;(async () => {
+      const back = await finishSignIn()
+      if (!back && (await refreshAtLaunch())) return // leaving for Google for a moment
+      const run = () => token() && syncNow().catch(() => {})
+      run()
+      timer = window.setInterval(run, 15 * 60_000)
+    })()
+    return () => clearInterval(timer)
+  }, [])
 
   useEffect(() => {
     requestPersistence()

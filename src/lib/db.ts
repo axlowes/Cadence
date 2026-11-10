@@ -82,6 +82,10 @@ export interface CalEvent {
   source: string // the imported file name, or Cadence for events made here
   note?: string
   sent?: boolean // opened in Google Calendar to be saved there too
+  calendarId?: string // set for events that live in Google, synced live
+  googleId?: string
+  color?: string
+  canEdit?: boolean
 }
 
 export interface HabitLog {

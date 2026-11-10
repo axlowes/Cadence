@@ -2,7 +2,7 @@ import { useState } from 'react'
 import type { Place } from '../lib/sky'
 import type { Profile } from '../lib/useProfile'
 import { BackupCard } from '../components/BackupCard'
-import { CalendarCard } from '../components/Calendar'
+import { CalendarCard, GoogleCard } from '../components/Calendar'
 
 interface Props {
   place: Place
@@ -112,6 +112,7 @@ export function Settings(props: Props) {
         </div>
       </section>
 
+      <GoogleCard />
       <CalendarCard />
       <BackupCard />
 

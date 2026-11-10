@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import { useLiveQuery } from 'dexie-react-hooks'
-import { db } from '../lib/db'
+import { db, setSetting } from '../lib/db'
+import { connect, disconnect, redirectUri, syncNow, token } from '../lib/google'
 import { eventsOn, importIcs } from '../lib/ics'
 import { fmtTime } from '../lib/useProfile'
 import { Fold } from './Fold'
@@ -43,7 +44,7 @@ export function CalendarCard() {
   const [msg, setMsg] = useState('')
   return (
     <section className="glass card stack">
-      <h2 className="serif">Google Calendar</h2>
+      <h2 className="serif">Calendar from a file</h2>
       <p className="small">
         On a computer, open calendar.google.com, then the gear, Settings, Import and export, and Export. Open the zip it downloads and choose the .ics file for the calendar you want here.
       </p>
@@ -68,6 +69,47 @@ export function CalendarCard() {
           }
         }} />
       <p className="small muted">Bringing the same file in again replaces the old copy, so you can refresh it whenever your plans change.</p>
+    </section>
+  )
+}
+
+/** Settings card for live Google Calendar. */
+export function GoogleCard() {
+  const clientId = useLiveQuery(() => db.settings.get('googleClientId').then((r) => (r?.value as string) ?? ''), [])
+  const last = useLiveQuery(() => db.settings.get('googleLastSync').then((r) => r?.value as number | undefined), [])
+  const connected = useLiveQuery(() => db.settings.get('googleConnected').then((r) => !!r?.value), [])
+  const [msg, setMsg] = useState('')
+  const live = !!token()
+  if (clientId === undefined) return null
+  return (
+    <section className="glass card stack">
+      <h2 className="serif">Live Google Calendar</h2>
+      {!clientId && (
+        <p className="small">Paste the key you made in Google Cloud. It ends in .apps.googleusercontent.com.</p>
+      )}
+      <label className="lbl" htmlFor="g-client">Your Google key (client ID)</label>
+      <input id="g-client" className="field" defaultValue={clientId} placeholder="1234-abc.apps.googleusercontent.com" autoComplete="off" spellCheck={false}
+        onBlur={(e) => setSetting('googleClientId', e.target.value.trim())} />
+      <p className="small muted">Your web address for Google is {redirectUri()}</p>
+      {clientId && !live && (
+        <button className="pill solid" onClick={() => connect().catch((e) => setMsg((e as Error).message))}>
+          {connected ? 'Reconnect Google' : 'Connect Google Calendar'}
+        </button>
+      )}
+      {live && (
+        <>
+          <p className="small">Connected. Your calendars refresh when you open Cadence and every 15 minutes while it is open.</p>
+          {last && <p className="small muted">Last refreshed {new Date(last).toLocaleString(undefined, { weekday: 'short', hour: 'numeric', minute: '2-digit' })}.</p>}
+          <div className="row">
+            <button className="pill solid" onClick={async () => {
+              setMsg('Refreshing...')
+              try { setMsg(`${await syncNow()} events are up to date.`) } catch (e) { setMsg((e as Error).message === 'signed-out' ? 'Google signed you out. Tap Reconnect.' : (e as Error).message) }
+            }}>Refresh now</button>
+            <button className="pill" onClick={async () => { await disconnect(); setMsg('Google is disconnected. Its events were cleared from Cadence.') }}>Disconnect</button>
+          </div>
+        </>
+      )}
+      {msg && <p className="small" role="status">{msg}</p>}
     </section>
   )
 }

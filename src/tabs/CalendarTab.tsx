@@ -42,7 +42,7 @@ export function CalendarTab({ today, onOpenSettings }: { today: string; onOpenSe
   const [editing, setEditing] = useState<{ ev: CalEvent; isNew: boolean } | null>(null)
   const open = (o: Occurrence) => setEditing({ ev: o.ev, isNew: false })
   const sources = [...new Set((events ?? []).map((e) => e.source))]
-  const color = (o: Occurrence) => COLORS[sources.indexOf(o.ev.source) % COLORS.length]
+  const color = (o: Occurrence) => o.ev.color ?? COLORS[sources.indexOf(o.ev.source) % COLORS.length]
   const pick = (v: View) => {
     setView(v)
     try {
